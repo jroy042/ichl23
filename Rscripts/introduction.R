@@ -1,4 +1,6 @@
-packs = c("tm", "tidytext","SnowballC", "servr", "dplyr","tidyr","purrr","readr","stringr","topicmodels","mgcv","ggplot2","visreg","stm","stmBrowser", "LDAvis")
+#packs = c("tm", "tidytext","SnowballC", "servr", "dplyr","tidyr","purrr","readr","stringr","topicmodels","mgcv","ggplot2","visreg","stm","stmBrowser", "LDAvis")
+# To install these pacakges
+# install.packages(packs, dependencies=TRUE)
 
 #text mining packages
 library(tm)
@@ -127,6 +129,20 @@ word_counts = diaWords %>%
 dia_dtm = word_counts %>%
   cast_dtm(id, word, n)
 
+# we can use other weighting systems
+dia_dtm = word_counts %>%
+  cast_dtm(id, word, n, weighting = tm::weightTf)
+
+bin_dia_dtm = word_counts %>%
+  cast_dtm(id, word, n, weighting = tm::weightBin)
+
+tf_idf_dia_dtm = word_counts %>%
+  cast_dtm(id, word, n, weighting = tm::weightTfIdf)
+
+
+
+
+
 
 # diaTopics <- LDA(dia_dtm, k = 15, control = list(seed = 1234))
 load("/data/data_ichl23/diaTopics.rda")
@@ -153,3 +169,67 @@ top_terms %>%
   ggplot(aes(term, beta, fill = factor(topic))) +
   geom_bar(alpha = 0.8, stat = "identity", show.legend = FALSE) +
   facet_wrap(~ topic, scales = "free")
+
+### How to Incorporate LDA into a Regression Analysis
+
+# We are not going to run this, just here for an example. 
+
+
+# library(mgcv)
+# library(visreg)
+# library(tidyr)
+# library(tidytext)
+# library(readxl)
+# 
+# 
+# setwd("C:/Users/Joe/Dropbox/Workshops/old workshops/Text Mining (Spring 2016)/week 6")
+# 
+# load("ldaOut2_12April.RData")
+# 
+# #Where I have all the data for my variable
+# 
+# tokens = read_excel("auxiliaryData.xlsx")
+# 
+# #To Make my life easier, we need to make all title names into
+# #lowercase
+# tokens = mutate_each(tokens, funs(tolower))
+# 
+# tokens$title = as.factor(tokens$title)
+# tokens$type = as.factor(tokens$type)
+# 
+# names(tokens)
+# 
+# 
+# dir.name = "C:/Users/Joe/Dropbox/Workshops/old workshops/Text Mining (Spring 2016)/week 6/brit"
+# file.names <- list.files(dir.name)
+# file.types <- numeric(length(file.names))
+# file.types[grep("\\.(txt)$", file.names)] <- 1
+# file.names <- file.names[file.types == 1]
+# 
+# fnames = gsub("\\.(txt)$","",file.names)
+# 
+# tprobs = tidy(ldaOut2, matrix = "gamma") 
+# 
+# tprobs$title = fnames
+# #tprobs$topic = paste0("Topic",tprobs$topic,sep="")
+# 
+# tprobs = tprobs %>%
+#   spread(topic,gamma,sep="t")
+# 
+# tokens2 = merge(tokens, tprobs,by="title")
+# 
+# names(tokens2)
+# 
+# gam1= gam(I(type=="inversion"~s(topict1)+s(topict2)+s(topict3)+s(topict3)+s(topict5)+s(topict6)),
+#           family="binomial",data=tokens2)
+# 
+# 
+# save(gam1,tokens2,file="gam1.RData")
+# 
+
+library(mgcv)
+library(visreg)
+
+load("/data/data_ichl23/gam1.Rdata")
+
+
