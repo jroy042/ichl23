@@ -1,0 +1,116 @@
+---
+title: "New Methods in Digital Historical Linguistics: Text mining"
+author: "Joseph Roy"
+date: "ICHL 23 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Materials
+
+All scripts are available here:
+[Workshop Code](https://github.com/jroy042/ichl23/tree/master/Rscripts)
+[slides](slides.pdf)
+## Data
+The data sets used today are available online below. The first three are freely available for academic research while the PPCMBE has to be purchased. 
+
+[Pamphlets of the American Revolution](http://ota.ox.ac.uk/desc/2021)
+
+[A Corpus of English Dialogues 1560-1760](http://ota.ox.ac.uk/desc/2507)
+
+[Feeding America:  The Historic American Cookbook Dataset 18th-20th Century](http://archive.lib.msu.edu/dinfo/feedingamerica/) 
+
+[Penn Parsed Corpus of Modern British English 1700-1913](https://www.ling.upenn.edu/hist-corpora/PPCMBE2-RELEASE-1/index.html)
+
+# Overview
+
+This workshop will illustrate how to use text mining and more specifically, different kinds of topic modeling (Blei, 2012; Grun B and Hornik, 2011) of a transcribed corpus in order to model linguistic variation and change and will demonstrate the results of such analysis on different sets of data. The process involves taking a corpus of text and reducing every text to a set of topics with associated probabilities for each topic.  Extentions of topic modeling (structured topic models and hierarchical topic models) are also presented along with basic word distance models, if time permits.  
+
+The extraction and analysis of topic (or semantic context) has several benefits for historical research in that it would allow researchers to incorporate a measure of meaning into a statistical model of language change.  While an introductory knowledge of R would be helpful, examples provided in R will be explained and the supplementary materials will have information for workshop attendees to install the software and get started with the models presented in the workshop. 
+
+## Outline
+
++ 10 am-12   *Session 1*
++ 12-1:30      Lunch (on your own)
++ 1:30-3 pm  *Session 2*
++ 3-3:15        Coffee break
++ 3:15- 4 pm *Session 3*
+
+1. Introduction (Session 1)
+
++ Defining Text Mining
++ Software and Hardware
++ Broad set of tools for text mining
++ Topic Modeling, Latent Semantic Analysis and Word Embedding
+
+2. Pre-processing the data (Session 1)
+
++ Uninformative Words (Stop words)
++ Stemming (if possible)
++ Considerations for historical data.
++ R packages: tidytext
+
+3. Basic Topic Modeling (Session 1, 2)
+
++ Finding topics in corpora.
++ Options for tokenizing data.
++ Interpreting Topics
++ Using topic probabilities in model of linguistic change.
++ R packages: topicmodels, mgcv
+
+4. Extensions of Topic Models (Session 2, 3)
+
++ Structured Topic Modeling
++ Dynamic Topic Modeling
++ Hierarchical Topic Modeling
++ R packages: stm, stmBrowser
+
+5. Word2vec (if time permits) (Session 3)
+
++ Semantic Embeddings of a lexical item
++ Building a word2vec model
++ Packages: WordVectors
+
+For the hands on components, students will be using an online version of RStudio which doesn't require pre-installation of any program, but instructions for instalation will be provided in the workshop materials.  All software used during the workshop will be open-source and freely available. While we may not get through everything, all the slides, data and code will be available for the participants on github prior to the workshop. 
+
+# Software
+All software is freely available. 
+
+1. R: [https://cran.r-project.org/](https://cran.r-project.org/)
+2. Rstudio: [https://www.rstudio.com/products/rstudio/](https://www.rstudio.com/products/rstudio/)
+3. Packages: "tm", "tidytext","SnowballC", "servr", "dplyr","tidyr","purrr","readr","stringr","topicmodels","mgcv","ggplot2","visreg","stm","stmBrowser", "LDAvis"
+
+## General References
+
+1. Tidy Text Mining with R by Julia Silge and David Robinson http://tidytextmining.com/
+2. Miner, Gary. Practical text mining and statistical analysis for non-structured text data applications. Academic Press, 2012.
+3. Jockers, Matthew. Text Analysis with R for Students of Literature. Springer, 2014.
+
+## Topic Modeling Methodology 
+
+1. Chang, Jonathan, Sean Gerrish, Chong Wang, Jordan L. Boyd-Graber, and David M. Blei. "Reading tea leaves: How humans interpret topic models." In Advances in neural information processing systems, pp. 288-296. 2009.
+2. Ignatow, Gabe. "Theoretical foundations for digital text analysis." Journal for the Theory of Social Behaviour (2015).
+3. Lee, Monica, and John Levi Martin. "Coding, counting and cultural cartography." American Journal of Cultural Sociology 3, no. 1 (2015): 1-33.
+4. Mohr, John W., and Petko Bogdanov. "Introduction-Topic models: What they are and why they matter." Poetics 41, no. 6 (2013): 545-569.
+
+## Applications in Social Sciences and Humanities
+
+1. Bail, Christopher A. "The cultural environment: Measuring culture with big data." Theory and Society 43, no. 3-4 (2014): 465-482.
+2. DiMaggio, Paul, Manish Nag, and David Blei. "Exploiting affinities between topic modeling and the sociological perspective on culture: Application to newspaper coverage of US government arts funding." Poetics 41, no. 6 (2013): 570-606.
+3. Fligstein, Neil, Jonah S. Brundage, and Michael Schultz. "Why the Federal Reserve Failed to See the Financial Crisis of 2008: The Role of "Macroeconomics" as a Sense making and Cultural Frame." (2014).
+4. Gentzkow, Matthew, and Jesse M. Shapiro. "What drives media slant? Evidence from US daily newspapers." Econometrica 78, no. 1 (2010): 35-71.
+5. Grimmer, Justin. "Appropriators not position takers: The distorting effects of electoral incentives on congressional representation." American Journal of Political Science 57, no. 3 (2013): 624-642.
+6. Hargittai, Eszter. "Is bigger always better? Potential biases of big data derived from social network sites." The ANNALS of the American Academy of Political and Social Science 659, no. 1 (2015): 63-76.
+7. Jacobi, Carina, Wouter van Atteveldt, and Kasper Welbers. "Quantitative analysis of large amounts of journalistic texts using topic modelling." Digital Journalism 4, no. 1 (2016): 89-106.
+8. Jelveh, Zubin, Bruce Kogut, and Suresh Naidu. "Detecting Latent Ideology in Expert Text: Evidence From Academic Papers in Economics." In EMNLP, pp. 1804-1809. 2014.
+9. Leskovec, Jure, Lars Backstrom, and Jon Kleinberg. "Meme-tracking and the dynamics of the news cycle." In Proceedings of the 15th ACM SIGKDD international conference on Knowledge discovery and data mining, pp. 497-506. ACM, 2009.
+10. Loughran, Tim, and Bill McDonald. "When is a Liability not a Liability?." Journal of Finance, forthcoming (2009).
+11. Mohr, John W., Robin Wagner-Pacifici, Ronald L. Breiger, and Petko Bogdanov. "Graphing the grammar of motives in National Security Strategies: Cultural interpretation, automated text analysis and the drama of global politics." Poetics 41, no. 6 (2013): 670-700.
+12. Niculae, Vlad, Srijan Kumar, Jordan Boyd-Graber, and Cristian Danescu-Niculescu-Mizil. "Linguistic Harbingers of Betrayal: A Case Study on an Online Strategy Game." arXiv preprint arXiv:1506.04744 (2015).
+13. Resnik, Philip, Anderson Garron, and Rebecca Resnik. "Using topic modeling to improve prediction of neuroticism and depression." In Proceedings of the 2013 Conference on Empirical Methods in Natural, pp. 1348-1353. Association for Computational Linguistics}, 2013.
+14. Saavedra, Serguei, Kathleen Hagerty, and Brian Uzzi. "Synchronicity, instant messaging, and performance among financial traders." Proceedings of the National Academy of Sciences 108, no. 13 (2011): 5296-5301.
+15. Yu, Dian, Yulia Tyshchuk, Heng Ji, and W. A. Wallace. "Detecting deceptive groups using conversations and network analysis." In Proceedings of the 53rd Annual Meeting of the Association for Computational Linguistics and the 7th International Joint Conference on Natural Language Processing of the Asian Federation of Natural Language Processing, ACL, pp. 26-31. 2015.
+
+
